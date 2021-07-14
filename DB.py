@@ -27,7 +27,5 @@ class DB():
             self.connect()
 
 
-# server
-#db = DB("143.93.27.103", "sport_asta_zw_db2", "_XLrazpNf3@M", "sport_asta_zw_db2")
 # test
 db = DB("91.204.46.200", "k146591_jonas", "Q6zo9!r3", "k146591_Sportraum_IODB")
