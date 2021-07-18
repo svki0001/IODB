@@ -8,10 +8,16 @@ class UserFaker:
     faker = None
     faker_adress = None
 
+    card_ids = set()
+    email_nbrs = set()
+
     sexes = ["male", "female", "diverse"]
     states = ["active", "inactive", "banned"]
     rights = ["user", "admin"]
     localizations = ["de_DE", "fr_FR", "en_US", "es_ES"]
+
+    prename = ""
+    surname = ""
 
     def __init__(self) -> None:
         # init faker
@@ -19,21 +25,36 @@ class UserFaker:
         
         self.faker = Faker(self.localizations[localization_index])
         self.faker_adress = Faker("de_DE")
+        self.prename = self.get_prename()
+        self.surname = self.get_surname()
 
     # cardID: Studentenkarten ID. Kann sich ändern.
     def get_cardID(self):
-        return ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
+        card_id = ""
+        card_id_added = False
+        while not card_id_added:
+            card_id = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
+            if card_id not in self.card_ids:
+                self.card_ids.add(card_id)
+                card_id_added = True
+        return card_id
 
     # Username: Wird aus den ersten drei Buchstaben vom Vor- und Nachnamen erzeugt. Kann der Benutzer später selbst ändern. 
-    def get_username(self, prename, surname):
-        return prename[:3] + surname[:3]
+    def get_username(self):
+        return self.prename[:3] + self.surname[:3]
 
     # Email: Studenten oder Mitarbeiter-Email. Ändert sich im System der Hochschule eigentlich nicht.
-    def get_email(self, prename, surname):
-        email_name = prename[:2] + surname[:2]
-        email_number = "00" + str(randrange(10)) + str(randrange(9) + 1)
+    def get_email(self):
+        email_name = self.prename[:2] + self.surname[:2]
+        email_added = False
+        while not email_added:
+            email_number = "00" + str(randrange(10)) + str(randrange(9) + 1)
+            email_short = email_name + email_number
+            if email_short not in self.email_nbrs:
+                self.email_nbrs.add(email_short)
+                email_added = True
         email_domain = "stud.hs-kl.de" if randrange(1) == 0 else "hs-kl.de"
-        return email_name + email_number + "@" + email_domain
+        return email_short + "@" + email_domain
 
     # Vorname
     def get_prename(self):
