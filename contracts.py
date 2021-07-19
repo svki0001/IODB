@@ -22,6 +22,11 @@ def write():
            
                 length = len(EmailFromUser)
                 for i in range(length):
+                   
+                    tech = ['Ausstehend', 'Gremien Mitg.', 'Bezahlt']
+                    weight = [1.5, 0.2, 3]
+                    ContractPaidRandom= random.choices(tech, k = 1, weights = weight)
+
 
 
                     email = EmailFromUser[i]
@@ -32,7 +37,7 @@ def write():
                     contractID = "AZW-"+str((bevoreBegin_calculate).strftime('%Y-%m-%d'))+"_"+str(UsernameFromUser[i])
                     contractEnd="2021-"+str(randrange(1,7))+"01"
                     contractPath="AZW-"+str((bevoreBegin_calculate).strftime('%Y-%m-%d'))+"_"+str(PrenameFromUser[i])+"_"+str(SurnameFromUser[i])+".pdf"
-                    contractPaid="Ausstehend"
+                    contractPaid= ContractPaidRandom[0]
                     dest.write(f"{contractID},{email},{contractBegin},{contractEnd},{contractPath},{contractPaid}\n")
             
 
