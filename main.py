@@ -1,13 +1,12 @@
 
-from Log_Users_Faker import Log_Users_Faker
-from dbQuerys import dbQuerys
 from UserFaker import UserFaker
+from Log_Users_Faker import Log_Users_Faker
 import time
-from datetime import datetime
+
 
 note = "note"
 nbr_users = 100000
-nbr_log_users = 10
+nbr_log_users = 100000
 start_time = 0
 end_time = 0
 
@@ -22,7 +21,7 @@ def print_loading_bar(i, len_bar=16, max=nbr_users):
 def createFakeUserCSV():
     # generate users
     with open(f"{main_dir}csvs/users.csv", "w", encoding="utf-8") as dest:
-        dest.write(f"cardID,username,email,prename,surname,birthDate,sex,validityDate,state,note,rights,street,postcode,city\n")
+        dest.write(f"cardID,username,email,prename,surname,birthDate,sex,validityDate,state,note,rights,street,postcode,city")
         print("starting generator...")
         start_time = time.time()
         for i in range(1, nbr_users+1):
@@ -53,7 +52,7 @@ def createFakeUserCSV():
 
 def createFakeLogUsersCSV():    # generate users
     with open(f"{main_dir}csvs/log_users.csv", "w", encoding="utf-8") as dest:
-        dest.write(f"cardID,sessionID,checkIn,checkOut\n")
+        dest.write(f"cardID,sessionID,checkIn,checkOut")
         print("starting generator...")
         start_time = time.time()
         for i in range(1, nbr_log_users+1):
@@ -63,10 +62,10 @@ def createFakeLogUsersCSV():    # generate users
             checkIn = log_users_faker.get_checkIn()
             checkOut = log_users_faker.get_checkOut(checkIn)
             
-            checkInStr = checkIn.strftime("%Y.%m.%d %H:%M:%S")
-            checkOutStr = checkOut.strftime("%Y.%m.%d %H:%M:%S")
+            checkInStr = checkIn.strftime("%Y-%m-%d %H:%M:%S")
+            checkOutStr = checkOut.strftime("%Y-%m-%d %H:%M:%S")
 
-            dest.write(f"{cardID},,{checkInStr},{checkOutStr}\n")
+            dest.write(f"'',{cardID},{checkInStr},{checkOutStr}\n")
             print_loading_bar(i=i, max=nbr_log_users)
 
 
