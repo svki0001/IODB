@@ -3,11 +3,12 @@ import time
 import csv
 import datetime
 from random import randrange
-
+import random
+from unidecode import unidecode
 #main_dir = "IODB/"
-main_dir = "C:/Users/klein/OneDrive/Desktop/abgabe/src/app/csvs/contract2.csv"
+main_dir = "C:/Users/klein/OneDrive/Desktop/abgabe/src/app/csvs/contract.csv"
 
-users_dir = "C:/Users/klein/OneDrive/Desktop/abgabe/src/app/csvs/users2.csv"
+users_dir = "C:/Users/klein/OneDrive/Desktop/abgabe/src/app/csvs/users.csv"
 
 EmailFromUser = []
 PrenameFromUser = []
@@ -48,11 +49,9 @@ if __name__ == "__main__":
         
         for row in reader:
             
-            EmailFromUser.append(str(row['email']))
-            PrenameFromUser.append(str(row['prename']))
-            SurnameFromUser.append(str(row['surname']))
-            UsernameFromUser.append( str(row['username']))
-            
+            EmailFromUser.append(unidecode(row['email']))
+            PrenameFromUser.append(unidecode(row['prename']))
+            SurnameFromUser.append(unidecode(row['surname']))
+            UsernameFromUser.append( unidecode(row['username']))
+           
         write()
-
-
