@@ -3,6 +3,7 @@ import random
 import string
 from random import randrange
 from unidecode import unidecode
+from lorem_text import lorem
 
 class UserFaker:
     faker = None
@@ -98,3 +99,10 @@ class UserFaker:
     # Stadt
     def get_city(self):
         return self.faker_adress.city()
+
+    def get_note(self):
+        note = ""
+        if random.random() < 0.2:
+            words = randrange(1, 15)
+            note = lorem.words(words)
+        return note
