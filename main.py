@@ -8,6 +8,8 @@ nbr_users = 100000
 start_time = 0
 end_time = 0
 
+main_dir = "IODB/"
+
 def print_loading_bar(i, len_bar=16):
     i = int((i / nbr_users) * len_bar)
     bar = "\u2593" * i + "\u2591" * (len_bar - i)
@@ -15,7 +17,7 @@ def print_loading_bar(i, len_bar=16):
 
 if __name__ == "__main__":
     # generate users
-    with open("csvs/users.csv", "w", encoding="utf-8") as dest:
+    with open(f"{main_dir}csvs/users.csv", "w", encoding="utf-8") as dest:
         dest.write(f"cardID,username,email,prename,surname,birthDate,sex,validityDate,state,note,rights,street,postcode,city")
         print("starting generator...")
         start_time = time.time()

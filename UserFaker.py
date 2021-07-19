@@ -2,22 +2,21 @@ from faker import Faker
 import random
 import string
 from random import randrange
-
+from unidecode import unidecode
 
 class UserFaker:
     faker = None
     faker_adress = None
 
+    n_users = 0
+
     card_ids = set()
-    email_nbrs = set()
+    email_shorts = dict()
 
     sexes = ["male", "female", "diverse"]
     states = ["active", "inactive", "banned"]
     rights = ["user", "admin"]
     localizations = ["de_DE", "fr_FR", "en_US", "es_ES"]
-
-    prename = ""
-    surname = ""
 
     def __init__(self) -> None:
         # init faker
@@ -41,18 +40,19 @@ class UserFaker:
 
     # Username: Wird aus den ersten drei Buchstaben vom Vor- und Nachnamen erzeugt. Kann der Benutzer später selbst ändern. 
     def get_username(self):
-        return self.prename[:3] + self.surname[:3]
+        username = self.prename[:3] + self.surname[:3]
+        return unidecode(username).lower()
 
     # Email: Studenten oder Mitarbeiter-Email. Ändert sich im System der Hochschule eigentlich nicht.
     def get_email(self):
         email_name = self.prename[:2] + self.surname[:2]
-        email_added = False
-        while not email_added:
-            email_number = "00" + str(randrange(10)) + str(randrange(9) + 1)
-            email_short = email_name + email_number
-            if email_short not in self.email_nbrs:
-                self.email_nbrs.add(email_short)
-                email_added = True
+        email_name = unidecode(email_name).lower()
+        if email_name in self.email_shorts.keys():
+            self.email_shorts[email_name] += 1
+        else:
+            self.email_shorts[email_name] = 1
+        email_number = f"{self.email_shorts[email_name]:04d}"
+        email_short = email_name + email_number
         email_domain = "stud.hs-kl.de" if randrange(1) == 0 else "hs-kl.de"
         return email_short + "@" + email_domain
 
@@ -64,7 +64,7 @@ class UserFaker:
     def get_surname(self):
         return self.faker.last_name()
 
-    # Geburtsdatumw
+    # Geburtsdatum
     def get_birthDate(self):
         return self.faker.date()
 
