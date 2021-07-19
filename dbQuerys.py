@@ -6,8 +6,6 @@ from DB import db
 class dbQuerys:
     @classmethod
     def addUser(self, cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city):
-        db.connection.ping(reconnect = True)
-
         cursor = db.connection.cursor()
 
         sql = (
@@ -18,8 +16,6 @@ class dbQuerys:
 
     @classmethod
     def addStrike(self, strikeID, sessionID, description):
-        db.connection.ping(reconnect = True)
-
         cursor = db.connection.cursor()
 
         sql = (
@@ -30,8 +26,6 @@ class dbQuerys:
 
     @classmethod
     def addLog(self, sessionID, cardID, checkIn, checkOut):
-        db.connection.ping(reconnect = True)
-
         cursor = db.connection.cursor()
 
         sql = (
@@ -42,8 +36,6 @@ class dbQuerys:
 
     @classmethod
     def addContract(self, contractID, email, contractBegin, contractEnd, contractPath, contractPaid):
-        db.connection.ping(reconnect = True)
-
         cursor = db.connection.cursor()
 
         sql = (
