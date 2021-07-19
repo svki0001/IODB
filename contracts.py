@@ -42,7 +42,7 @@ if __name__ == "__main__":
         reader = csv.DictReader(csvfile)
         
         for row in reader:
-            print("drin")
+            
             EmailFromUser.append(str(row['email']))
             PrenameFromUser.append(str(row['prename']))
             SurnameFromUser.append(str(row['surname']))
