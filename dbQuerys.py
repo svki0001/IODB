@@ -10,12 +10,8 @@ class dbQuerys:
         )
         cursor.execute(sql)
 
-        cursor.execute(sql)
-
     @classmethod
     def get_random_cardID(self):
-        db.connection.ping(reconnect = True)
-
         cursor = db.connection.cursor(dictionary = True, buffered = True)
 
         sql = """SELECT cardID FROM Users
