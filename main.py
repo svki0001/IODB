@@ -8,7 +8,8 @@ nbr_users = 100000
 start_time = 0
 end_time = 0
 
-main_dir = "IODB/"
+#main_dir = "IODB/"
+main_dir = ""
 
 def print_loading_bar(i, len_bar=16):
     i = int((i / nbr_users) * len_bar)
