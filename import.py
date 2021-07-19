@@ -31,8 +31,6 @@ def import_users():
                 print(f"imported {line[0]}")
             i += 1
 
-def update_user():
-
 def import_strikes():
     with open(f"{main_dir}csvs/strikes.csv", "r") as src:
         i = 0

@@ -1,13 +1,7 @@
 from DB import db
 class dbQuerys:
     @classmethod
-<<<<<<< HEAD
-    def add_user(self, cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city):
-        db.connection.ping(reconnect = True)
-
-=======
     def addUser(self, cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city):
->>>>>>> 2c236f4aa226a63c396e785f1f877bc49967f523
         cursor = db.connection.cursor()
 
         sql = (
@@ -63,11 +57,9 @@ class dbQuerys:
             f"VALUES ('{contractID}', '{email}', '{contractBegin}', '{contractEnd}', '{contractPath}', '{contractPaid}')"
         )
         cursor.execute(sql)
-<<<<<<< HEAD
-=======
 
     @classmethod
     def updateUserNote(self, note, cardID):
         cursor = db.connection.cursor()
         sql = f"UPDATE Users SET note = {note} WHERE cardID = {cardID}"
->>>>>>> 2c236f4aa226a63c396e785f1f877bc49967f523
+        cursor.execute(sql)
