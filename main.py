@@ -3,7 +3,6 @@ from dbQuerys import dbQuerys
 from UserFaker import UserFaker
 import time
 
-note = "note"
 nbr_users = 100000
 start_time = 0
 end_time = 0
@@ -34,6 +33,7 @@ if __name__ == "__main__":
             sex = user_faker.get_sex()
             validityDate = user_faker.get_validityDate()
             state = user_faker.get_state()
+            note = user_faker.get_note()
             rights = user_faker.get_rights()
             street = user_faker.get_street()
             postcode = user_faker.get_postcode()

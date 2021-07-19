@@ -43,3 +43,8 @@ class dbQuerys:
             f"VALUES ('{contractID}', '{email}', '{contractBegin}', '{contractEnd}', '{contractPath}', '{contractPaid}')"
         )
         cursor.execute(sql)
+
+    @classmethod
+    def updateUserNote(self, note, cardID):
+        cursor = db.connection.cursor()
+        sql = f"UPDATE Users SET note = {note} WHERE cardID = {cardID}"
