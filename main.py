@@ -19,7 +19,7 @@ def print_loading_bar(i, len_bar=16):
 if __name__ == "__main__":
     # generate users
     with open(f"{main_dir}csvs/users.csv", "w", encoding="utf-8") as dest:
-        dest.write(f"cardID,username,email,prename,surname,birthDate,sex,validityDate,state,note,rights,street,postcode,city")
+        dest.write(f"cardID,username,email,prename,surname,birthDate,sex,validityDate,state,note,rights,street,postcode,city\n")
         print("starting generator...")
         start_time = time.time()
         for i in range(1, nbr_users+1):
