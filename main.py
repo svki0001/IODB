@@ -1,23 +1,21 @@
-
-from UserFaker import UserFaker
-from Log_Users_Faker import Log_Users_Faker
 import time
-
+import database.dbImport as dbImport
 
 nbr_users = 100000
 nbr_log_users = 100000
 start_time = 0
 end_time = 0
 
-#main_dir = "IODB/"
 main_dir = ""
+#main_dir = "IODB/"
 
 def print_loading_bar(i, len_bar=16, max=nbr_users):
     i = int((i / max) * len_bar)
     bar = "\u2593" * i + "\u2591" * (len_bar - i)
     print(bar, end="\r")
 
-def createFakeUserCSV():
+def generateFakeUsers():
+    from generator.UserFaker import UserFaker
     # generate users
     with open(f"{main_dir}csvs/users.csv", "w", encoding="utf-8") as dest:
         dest.write(f"cardID,username,email,prename,surname,birthDate,sex,validityDate,state,note,rights,street,postcode,city")
@@ -45,18 +43,18 @@ def createFakeUserCSV():
             print_loading_bar(i, max=nbr_users)
             #print(cardID, prename, surname, username, email, birthDate, sex, validityDate, state, rights, street, postcode, city)
 
-
         end_time = time.time()
         print()
         print(f"finished in {int((end_time - start_time) / 60)} minutes!")
 
-def createFakeLogUsersCSV():    # generate users
+def generateLogUsers():    # generate users
+    from generator.LogUsersFaker import LogUsersFaker
     with open(f"{main_dir}csvs/log_users.csv", "w", encoding="utf-8") as dest:
-        dest.write(f"sessionID,cardID,checkIn,checkOut")
+        dest.write(f"cardID,checkIn,checkOut")
         print("starting generator...")
         start_time = time.time()
         for i in range(1, nbr_log_users+1):
-            log_users_faker = Log_Users_Faker()
+            log_users_faker = LogUsersFaker()
 
             cardID = log_users_faker.get_cardID()
             checkIn = log_users_faker.get_checkIn()
@@ -65,7 +63,7 @@ def createFakeLogUsersCSV():    # generate users
             checkInStr = checkIn.strftime("%Y-%m-%d %H:%M:%S")
             checkOutStr = checkOut.strftime("%Y-%m-%d %H:%M:%S")
 
-            dest.write(f",{cardID},{checkInStr},{checkOutStr}\n")
+            dest.write(f"{cardID},{checkInStr},{checkOutStr}\n")
             print_loading_bar(i=i, max=nbr_log_users)
 
 
@@ -73,8 +71,32 @@ def createFakeLogUsersCSV():    # generate users
         print()
         print(f"finished in {int((end_time - start_time) / 60)} minutes!")
 
+def generateContracts():
+    from generator.ContractFaker import ContractFaker
+    cf = ContractFaker()
+    cf.generateContracts()
+    
+def generateStrikes():
+    from generator.StrikeFaker import StrikeFaker
+    sf = StrikeFaker()
+    sf.generateStrikes()
+
+    
+def generateUserNotes():
+    from generator.UserNotesFaker import UserNotesFaker
+    uf = UserNotesFaker()
+    uf.generateUserNotes()
 
 if __name__ == "__main__":
-    #dbQuerys.addUser("6b9a0488", "svekir", "svki0001@stud.hs-kl.de", "Sven", "Kirtz", "1994-06-14", "male", "2021-01-01", "active", "Lorem Ipsum", "user", "virginiastr 14c", "66482", "zweibrücken")
-    #createFakeUserCSV()
-    createFakeLogUsersCSV()
+    # generateFakeUsers()
+    # generateContracts()
+
+    # START HERE
+    generateUserNotes()
+    # generateLogUsers()
+    # generateStrikes()
+
+    # dbImport.import_users
+    # dbImport.import_log_users
+    # dbImport.import_contracts
+    # dbImport.import_strikes
