@@ -41,8 +41,7 @@ def import_strikes():
                 line = line.split(",")
                 dbQuerys.addStrike(
                     line[0],
-                    line[1],
-                    line[2]
+                    line[1]
                 )
                 print(f"imported {line[0]}")
             i += 1
@@ -57,8 +56,7 @@ def import_log_users():
                 dbQuerys.addLog(
                     line[0],
                     line[1],
-                    line[2],
-                    line[3]
+                    line[2]
                 )
                 print(f"imported {line[0]}")
             i += 1
