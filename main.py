@@ -91,8 +91,8 @@ if __name__ == "__main__":
     # generateContracts()
 
     # START HERE
-    generateUserNotes()
-    # generateLogUsers()
+    # generateUserNotes()
+    generateLogUsers()
     # generateStrikes()
 
     # CONTINUE HERE

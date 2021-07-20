@@ -1,4 +1,5 @@
-from DB import db
+from .DB import db
+
 class dbQuerys:
     @classmethod
     def addUser(self, cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city):
@@ -57,5 +58,5 @@ class dbQuerys:
     @classmethod
     def updateUserNote(self, note, cardID):
         cursor = db.connection.cursor()
-        sql = f"UPDATE Users SET note = {note} WHERE cardID = {cardID}"
+        sql = f"UPDATE Users SET note = '{note}' WHERE cardID = '{cardID}'"
         cursor.execute(sql)

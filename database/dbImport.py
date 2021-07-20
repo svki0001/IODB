@@ -1,5 +1,5 @@
 import pandas as pd
-from dbQuerys import dbQuerys
+from database.dbQuerys import dbQuerys
 
 main_dir = ""
 main_dir = "IODB/"

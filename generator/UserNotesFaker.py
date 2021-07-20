@@ -6,7 +6,7 @@ from database.dbQuerys import dbQuerys
 
 class UserNotesFaker:
     main_dir = ""
-    main_dir = "IODB/"
+    main_dir = ""
 
     users_path = f"{main_dir}csvs/users.csv"
 
