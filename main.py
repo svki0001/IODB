@@ -1,5 +1,4 @@
 import time
-import database.dbImport as dbImport
 
 nbr_users = 100000
 nbr_log_users = 100000
@@ -96,6 +95,8 @@ if __name__ == "__main__":
     # generateLogUsers()
     # generateStrikes()
 
+    # CONTINUE HERE
+    import database.dbImport as dbImport
     # dbImport.import_users
     # dbImport.import_log_users
     # dbImport.import_contracts
