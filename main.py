@@ -52,7 +52,7 @@ def createFakeUserCSV():
 
 def createFakeLogUsersCSV():    # generate users
     with open(f"{main_dir}csvs/log_users.csv", "w", encoding="utf-8") as dest:
-        dest.write(f"cardID,sessionID,checkIn,checkOut")
+        dest.write(f"sessionID,cardID,checkIn,checkOut")
         print("starting generator...")
         start_time = time.time()
         for i in range(1, nbr_log_users+1):
@@ -65,7 +65,7 @@ def createFakeLogUsersCSV():    # generate users
             checkInStr = checkIn.strftime("%Y-%m-%d %H:%M:%S")
             checkOutStr = checkOut.strftime("%Y-%m-%d %H:%M:%S")
 
-            dest.write(f"'',{cardID},{checkInStr},{checkOutStr}\n")
+            dest.write(f",{cardID},{checkInStr},{checkOutStr}\n")
             print_loading_bar(i=i, max=nbr_log_users)
 
 
