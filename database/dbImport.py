@@ -79,5 +79,5 @@ def import_contracts():
                 print(f"imported {line[0]}")
             i += 1
 
-import_users()
+#import_users()
 # import_log_users()
