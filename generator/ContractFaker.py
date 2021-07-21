@@ -20,7 +20,6 @@ class ContractFaker:
 
     # print(emails)
 
-
     def generateContracts(self):
         with open(f"{self.main_dir}csvs/contracts.csv", "w", encoding="utf-8") as dest:
             dest.write(f"contractID,email,contractBegin,contractEnd,contractPath,contractPaid")
@@ -43,8 +42,6 @@ class ContractFaker:
                     n = str(int(re.search(r"\d+", email).group()))
                     contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(self.usernames[i]) + n
                     
-
-
                 contractEnd="2021-" + str(randrange(1,7)) + "01"
                 contractPath="AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(self.prenames[i]) + "_" + str(self.surnames[i]) + ".pdf"
                 contractPaid= contractPaidRandom[0]

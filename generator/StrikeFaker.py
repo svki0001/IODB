@@ -12,7 +12,7 @@ class StrikeFaker:
         sessIDs = df["sessionID"]
         sessionIDs = [sessIDs[randrange(0, n_strikes)] for n in range(n_strikes)]
 
-        with open(f"{self.main_dir}csvs/users.csv", "w", encoding="utf-8") as dest:
+        with open(f"{self.main_dir}csvs/strikes.csv", "w", encoding="utf-8") as dest:
             dest.write(f"sessionID,description")
             for sessionID in sessionIDs:
                 count = randrange(3, 15)
