@@ -36,6 +36,7 @@ class ContractFaker:
                 contractBegin_calc =datetime.datetime.today()-datetime.timedelta(days=randrange(0,30))
                 contractBegin = contractBegin_calc.strftime("%Y-%m-%d")
                 beforeBegin_calc= contractBegin_calc-datetime.timedelta(days=randrange(0,8))
+                
                 if re.search(r"0000", email):
                     contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(self.usernames[i])
                 else:

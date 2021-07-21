@@ -4,7 +4,7 @@ import pandas as pd
 
 class StrikeFaker:
     main_dir = ""
-    #main_dir = "IODB/"
+    # main_dir = "IODB/"
 
     def generateStrikes(self):
         n_strikes = int(100000 * 0.10)

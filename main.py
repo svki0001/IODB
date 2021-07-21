@@ -91,7 +91,6 @@ def generateStrikes():
     sf = StrikeFaker()
     sf.generateStrikes()
 
-    
 def generateUserNotes():
     from generator.UserNotesFaker import UserNotesFaker
     uf = UserNotesFaker()
