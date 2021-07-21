@@ -8,7 +8,7 @@ contractIDs = set()
 
 class ContractFaker:
     main_dir = ""
-    #main_dir = "IODB/"
+    # main_dir = "IODB/"
 
     df = pd.read_csv(f"{main_dir}csvs/users.csv")
 
@@ -17,8 +17,10 @@ class ContractFaker:
     surnames = df["surname"]
     usernames = df["username"]
 
+    # print(emails)
+
     def generateContracts(self):
-        with open(f"{self.main_dir}/csvs/contracts.csv", "w", encoding="utf-8") as dest:
+        with open(f"{self.main_dir}csvs/contracts.csv", "w", encoding="utf-8") as dest:
             dest.write(f"contractID,email,contractBegin,contractEnd,contractPath,contractPaid")
             print("starting generator...")
         

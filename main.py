@@ -99,17 +99,17 @@ def generateUserNotes():
 
 if __name__ == "__main__":
     # generateFakeUsers()
-    # generateContracts()
+    generateContracts()
 
     # START HERE
     # generateUserNotes()
-    import database.dbImport as dbImport
+    # import database.dbImport as dbImport
     # dbImport.import_users
     # generateLogUsers()
     #dbImport.import_log_users
     # generateStrikes()
     # dbImport.import_strikes
 
-    dbImport.import_contracts()
+    # dbImport.import_contracts()
     
     # CONTINUE HERE
