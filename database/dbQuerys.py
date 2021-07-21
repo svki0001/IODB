@@ -12,6 +12,19 @@ class dbQuerys:
         cursor.execute(sql)
 
     @classmethod
+    def checkEmail(self, email):
+        cursor = db.connection.cursor(dictionary = True, buffered = True)
+
+        sql = f"SELECT 1 FROM Users WHERE email = '{email}';"
+
+        cursor.execute(sql)
+
+        data = cursor.fetchone()
+
+        return data != None
+
+
+    @classmethod
     def get_random_cardID(self):
         cursor = db.connection.cursor(dictionary = True, buffered = True)
 
@@ -40,8 +53,8 @@ class dbQuerys:
         cursor = db.connection.cursor()
 
         sql = (
-            "INSERT INTO Log_Users (sessionID, cardID, checkIn, checkOut)"
-            f"VALUES ('{sessionID}', '{cardID}', '{checkIn}', '{checkOut}')"
+            "INSERT INTO Log_Users (cardID, checkIn, checkOut)"
+            f"VALUES ('{cardID}', '{checkIn}', '{checkOut}')"
         )
         cursor.execute(sql)
 

@@ -4,6 +4,8 @@ import string
 from random import randrange
 from unidecode import unidecode
 from lorem_text import lorem
+import uuid
+from database.dbQuerys import dbQuerys
 
 class UserFaker:
     faker = None
@@ -30,14 +32,8 @@ class UserFaker:
 
     # cardID: Studentenkarten ID. Kann sich ändern.
     def get_cardID(self):
-        card_id = ""
-        card_id_added = False
-        while not card_id_added:
-            card_id = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
-            if card_id not in self.card_ids:
-                self.card_ids.add(card_id)
-                card_id_added = True
-        return card_id
+        return str(uuid.uuid4()).replace("-", "")[:14]
+        # return ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
 
     # Username: Wird aus den ersten drei Buchstaben vom Vor- und Nachnamen erzeugt. Kann der Benutzer später selbst ändern. 
     def get_username(self):
@@ -48,14 +44,21 @@ class UserFaker:
     def get_email(self):
         email_name = self.prename[:2] + self.surname[:2]
         email_name = unidecode(email_name).lower()
-        if email_name in self.email_shorts.keys():
-            self.email_shorts[email_name] += 1
-        else:
-            self.email_shorts[email_name] = 1
-        email_number = f"{self.email_shorts[email_name]:04d}"
+        # if email_name in self.email_shorts.keys():
+        #     self.email_shorts[email_name] += 1
+        # else:
+        #     self.email_shorts[email_name] = 1
+        # email_number = f"{self.email_shorts[email_name]:04d}"
+        email_number = "00" + str(randrange(10)) + str(randrange(9) + 1)
+
         email_short = email_name + email_number
-        email_domain = "stud.hs-kl.de" if randrange(1) == 0 else "hs-kl.de"
-        return email_short + "@" + email_domain
+        email_domain = "stud.hs-kl.de" if randrange(2) == 0 else "hs-kl.de"
+        email = email_short + "@" + email_domain
+
+        while (dbQuerys.checkEmail(email)):
+            return self.get_email()
+
+        return email
 
     # Vorname
     def get_prename(self):
