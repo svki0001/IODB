@@ -3,6 +3,7 @@ from random import randrange
 import random
 import pandas as pd
 from unidecode import unidecode
+import re
 
 contractIDs = set()
 
@@ -18,6 +19,7 @@ class ContractFaker:
     usernames = df["username"]
 
     # print(emails)
+
 
     def generateContracts(self):
         with open(f"{self.main_dir}csvs/contracts.csv", "w", encoding="utf-8") as dest:
@@ -35,12 +37,12 @@ class ContractFaker:
                 contractBegin_calc =datetime.datetime.today()-datetime.timedelta(days=randrange(0,30))
                 contractBegin = contractBegin_calc.strftime("%Y-%m-%d")
                 beforeBegin_calc= contractBegin_calc-datetime.timedelta(days=randrange(0,8))
-                contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(self.usernames[i])
-
-                contractIDIndex = 0
-                while contractID in contractIDs:
-                    contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(self.usernames[i]) + str(contractIDIndex)
-                    contractIDIndex += 1
+                if re.search(r"0000", email):
+                    contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(self.usernames[i])
+                else:
+                    n = str(int(re.search(r"\d+", email).group()))
+                    contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(self.usernames[i]) + n
+                    
 
 
                 contractEnd="2021-" + str(randrange(1,7)) + "01"
