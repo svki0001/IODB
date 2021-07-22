@@ -97,7 +97,7 @@ def generateUserNotes():
     uf.generateUserNotes()
 
 if __name__ == "__main__":
-    generator.LogUsersFaker.generate_log_users()
+    # generator.LogUsersFaker.generate_log_users()
 
     # generateStrikes()
 
@@ -105,8 +105,8 @@ if __name__ == "__main__":
     
     # CONTINUE HERE
     # import data
-    # import database.dbImport as dbImport
-    # dbImport.import_users
-    # dbImport.import_log_users
+    import database.dbImport as dbImport
+    # dbImport.import_users()
     # dbImport.import_contracts()
+    dbImport.import_log_users()
     # dbImport.import_strikes()
