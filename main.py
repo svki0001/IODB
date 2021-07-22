@@ -11,7 +11,6 @@ main_dir = ""
 
 cardIDs = set()
 
-
 def print_loading_bar(current, len_bar=16, max=nbr_users):
     i = int((current / max) * len_bar)
     bar = "\u2593" * i + "\u2591" * (len_bar - i)
@@ -91,13 +90,13 @@ def generateStrikes():
     sf = StrikeFaker()
     sf.generateStrikes()
 
-    
 def generateUserNotes():
     from generator.UserNotesFaker import UserNotesFaker
     uf = UserNotesFaker()
     uf.generateUserNotes()
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     generateFakeUsers()
     # generateContracts()
 
@@ -107,9 +106,16 @@ if __name__ == "__main__":
     # dbImport.import_users
     # generateLogUsers()
     # dbImport.import_log_users
+=======
+    # generate data
+    # generateFakeUsers()
+    # generateUserNotes()
+    # generateContracts()
+    # generateLogUsers()
+>>>>>>> main
     # generateStrikes()
-    # dbImport.import_strikes
 
+<<<<<<< HEAD
     # dbImport.import_contracts
     
     # CONTINUE HERE
@@ -118,3 +124,11 @@ if __name__ == "__main__":
     
     
     
+=======
+    # import data
+    import database.dbImport as dbImport
+    # dbImport.import_users
+    # dbImport.import_log_users
+    # dbImport.import_contracts()
+    dbImport.import_strikes()
+>>>>>>> main

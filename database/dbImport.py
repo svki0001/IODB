@@ -2,7 +2,7 @@ import pandas as pd
 from database.dbQuerys import dbQuerys
 
 main_dir = ""
-main_dir = "IODB/"
+# main_dir = "IODB/"
 
 df = pd.read_csv(f"{main_dir}csvs/users.csv", sep=",")
 

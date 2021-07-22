@@ -39,12 +39,12 @@ class dbQuerys:
         return data["cardID"]
 
     @classmethod
-    def addStrike(self, strikeID, sessionID, description):
+    def addStrike(self, sessionID, description):
         cursor = db.connection.cursor()
 
         sql = (
-            "INSERT INTO Strikes (strikeID, sessionID, description)"
-            f"VALUES ('{strikeID}', '{sessionID}', '{description}')"
+            "INSERT INTO Strikes (sessionID, description)"
+            f"VALUES ('{sessionID}', '{description}')"
         )
         cursor.execute(sql)
 
