@@ -7,6 +7,30 @@ from lorem_text import lorem
 import uuid
 from database.dbQuerys import dbQuerys
 
+
+
+# def generateUsers():
+#     n_users = 100000
+
+#     card_ids = set()
+#     email_shorts = dict()
+
+#     localizations = ["de_DE", "fr_FR", "en_US", "es_ES"]
+#     sexes = ["male", "female", "diverse"]
+#     states = ["active", "inactive", "banned"]
+#     rights = ["user", "admin"]
+    
+#     # init faker
+#     localization_index = randrange(len(localizations)-1)
+    
+#     faker = Faker(localizations[localization_index])
+#     faker_adress = Faker("de_DE")
+
+#     for i in range(n_users):
+#         cardID = str(uuid.uuid4()).replace("-", "")[:14]
+#         prename = faker.first_name()
+#         username = prename[:3] + surname[:3]
+
 class UserFaker:
     faker = None
     faker_adress = None
@@ -27,8 +51,6 @@ class UserFaker:
         
         self.faker = Faker(self.localizations[localization_index])
         self.faker_adress = Faker("de_DE")
-        self.prename = self.get_prename()
-        self.surname = self.get_surname()
 
     # cardID: Studentenkarten ID. Kann sich ändern.
     def get_cardID(self):
@@ -109,3 +131,5 @@ class UserFaker:
             words = randrange(1, 15)
             note = lorem.words(words)
         return note
+
+    def generateUsers(self):

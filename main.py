@@ -1,7 +1,7 @@
 from database.dbQuerys import dbQuerys
 import time
 
-nbr_users = 100000
+nbr_users = 9768
 nbr_log_users = 100000
 start_time = 0
 end_time = 0
@@ -59,27 +59,27 @@ def generateFakeUsers():
 
 def generateLogUsers():    # generate users
     from generator.LogUsersFaker import LogUsersFaker
-    #with open(f"{main_dir}csvs/log_users.csv", "w", encoding="utf-8") as dest:
-        #dest.write(f"cardID,checkIn,checkOut")
-    print("starting generator...")
-    start_time = time.time()
-    for i in range(1, nbr_log_users+1):
-        log_users_faker = LogUsersFaker()
+    with open(f"{main_dir}csvs/log_users.csv", "w", encoding="utf-8") as dest:
+        dest.write(f"cardID,checkIn,checkOut")
+        print("starting generator...")
+        start_time = time.time()
+        for i in range(1, nbr_log_users+1):
+            log_users_faker = LogUsersFaker()
 
-        cardID = log_users_faker.get_cardID()
-        checkIn = log_users_faker.get_checkIn()
-        checkOut = log_users_faker.get_checkOut(checkIn)
-        
-        checkInStr = checkIn.strftime("%Y-%m-%d %H:%M:%S")
-        checkOutStr = checkOut.strftime("%Y-%m-%d %H:%M:%S")
+            cardID = log_users_faker.get_cardID()
+            checkIn = log_users_faker.get_checkIn()
+            checkOut = log_users_faker.get_checkOut(checkIn)
+            
+            checkInStr = checkIn.strftime("%Y-%m-%d %H:%M:%S")
+            checkOutStr = checkOut.strftime("%Y-%m-%d %H:%M:%S")
 
-        print_loading_bar(current=i, max=nbr_log_users)
-        dbQuerys.addLog(None, cardID, checkInStr, checkOutStr)
-            #dest.write(f"{cardID},{checkInStr},{checkOutStr}\n")
+            dest.write(f"{cardID},{checkInStr},{checkOutStr}\n")
+            print_loading_bar(i=i, max=nbr_log_users)
 
-    end_time = time.time()
-    print()
-    print(f"finished in {int((end_time - start_time) / 60)} minutes!")
+
+        end_time = time.time()
+        print()
+        print(f"finished in {int((end_time - start_time) / 60)} minutes!")
 
 def generateContracts():
     from generator.ContractFaker import ContractFaker
@@ -98,18 +98,23 @@ def generateUserNotes():
     uf.generateUserNotes()
 
 if __name__ == "__main__":
-    # generateFakeUsers()
+    generateFakeUsers()
     # generateContracts()
 
     # START HERE
     # generateUserNotes()
-    import database.dbImport as dbImport
+    #import database.dbImport as dbImport
     # dbImport.import_users
     # generateLogUsers()
-    #dbImport.import_log_users
+    # dbImport.import_log_users
     # generateStrikes()
     # dbImport.import_strikes
 
-    dbImport.import_contracts()
+    # dbImport.import_contracts
     
     # CONTINUE HERE
+    
+    
+    
+    
+    
