@@ -11,7 +11,6 @@ main_dir = ""
 
 cardIDs = set()
 
-
 def print_loading_bar(current, len_bar=16, max=nbr_users):
     i = int((current / max) * len_bar)
     bar = "\u2593" * i + "\u2591" * (len_bar - i)
