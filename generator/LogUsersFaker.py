@@ -21,7 +21,7 @@ def generate_log_users():
         print("starting generator...")
         start_time = time.time()
 
-        for i in range(n_log_users + 1):
+        for i in range(n_log_users):
             cardID = random.choice(u_cardIDs)
             checkIn = faker.date_time_between(start_date="-1y", end_date="-1d")
             
@@ -31,7 +31,7 @@ def generate_log_users():
             checkInStr = checkIn.strftime("%Y-%m-%d %H:%M:%S")
             checkOutStr = checkOut.strftime("%Y-%m-%d %H:%M:%S")
             
-            dest.write(f"{cardID},{checkInStr},{checkOutStr}\n")
+            dest.write(f"\n{cardID},{checkInStr},{checkOutStr}")
             loading_bar.print_loading_bar(current=i, max=n_log_users)
 
     end_time = time.time()

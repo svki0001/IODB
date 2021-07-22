@@ -49,7 +49,7 @@ class dbQuerys:
         cursor.execute(sql)
 
     @classmethod
-    def addLog(self, sessionID, cardID, checkIn, checkOut):
+    def addLog(self, cardID, checkIn, checkOut):
         cursor = db.connection.cursor()
 
         sql = (

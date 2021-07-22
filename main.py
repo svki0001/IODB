@@ -108,5 +108,5 @@ if __name__ == "__main__":
     import database.dbImport as dbImport
     # dbImport.import_users()
     # dbImport.import_contracts()
-    dbImport.import_log_users()
-    # dbImport.import_strikes()
+    # dbImport.import_log_users()
+    dbImport.import_strikes()
