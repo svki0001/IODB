@@ -1,75 +1,66 @@
 from .DB import db
 
-class dbQuerys:
-    @classmethod
-    def addUser(self, cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city):
-        cursor = db.connection.cursor()
+def add_user(cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city):
+    cursor = db.connection.cursor()
 
-        sql = (
-            "INSERT INTO Users (cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city)"
-            f"VALUES ('{cardID}', '{username}', '{email}', '{prename}', '{surname}', '{birthDate}', '{sex}', '{validityDate}', '{state}', '{note}', '{rights}', '{street}', {postcode}, '{city}')"
-        )
-        cursor.execute(sql)
+    sql = (
+        "INSERT INTO Users (cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city)"
+        f"VALUES ('{cardID}', '{username}', '{email}', '{prename}', '{surname}', '{birthDate}', '{sex}', '{validityDate}', '{state}', '{note}', '{rights}', '{street}', {postcode}, '{city}')"
+    )
+    cursor.execute(sql)
 
-    @classmethod
-    def checkEmail(self, email):
-        cursor = db.connection.cursor(dictionary = True, buffered = True)
+def check_email(email):
+    cursor = db.connection.cursor(dictionary = True, buffered = True)
 
-        sql = f"SELECT 1 FROM Users WHERE email = '{email}';"
+    sql = f"SELECT 1 FROM Users WHERE email = '{email}';"
 
-        cursor.execute(sql)
+    cursor.execute(sql)
 
-        data = cursor.fetchone()
+    data = cursor.fetchone()
 
-        return data != None
+    return data != None
 
+def get_random_cardID():
+    cursor = db.connection.cursor(dictionary = True, buffered = True)
 
-    @classmethod
-    def get_random_cardID(self):
-        cursor = db.connection.cursor(dictionary = True, buffered = True)
+    sql = """SELECT cardID FROM Users
+                ORDER BY RAND()
+                LIMIT 1;"""
 
-        sql = """SELECT cardID FROM Users
-                 ORDER BY RAND()
-                 LIMIT 1;"""
+    cursor.execute(sql)
 
-        cursor.execute(sql)
+    data = cursor.fetchone()
 
-        data = cursor.fetchone()
+    return data["cardID"]
 
-        return data["cardID"]
+def add_strike(sessionID, description):
+    cursor = db.connection.cursor()
 
-    @classmethod
-    def addStrike(self, sessionID, description):
-        cursor = db.connection.cursor()
+    sql = (
+        "INSERT INTO Strikes (sessionID, description)"
+        f"VALUES ('{sessionID}', '{description}')"
+    )
+    cursor.execute(sql)
 
-        sql = (
-            "INSERT INTO Strikes (sessionID, description)"
-            f"VALUES ('{sessionID}', '{description}')"
-        )
-        cursor.execute(sql)
+def add_log(cardID, checkIn, checkOut):
+    cursor = db.connection.cursor()
 
-    @classmethod
-    def addLog(self, cardID, checkIn, checkOut):
-        cursor = db.connection.cursor()
+    sql = (
+        "INSERT INTO Log_Users (cardID, checkIn, checkOut)"
+        f"VALUES ('{cardID}', '{checkIn}', '{checkOut}')"
+    )
+    cursor.execute(sql)
 
-        sql = (
-            "INSERT INTO Log_Users (cardID, checkIn, checkOut)"
-            f"VALUES ('{cardID}', '{checkIn}', '{checkOut}')"
-        )
-        cursor.execute(sql)
+def add_contract(contractID, email, contractBegin, contractEnd, contractPath, contractPaid):
+    cursor = db.connection.cursor()
 
-    @classmethod
-    def addContract(self, contractID, email, contractBegin, contractEnd, contractPath, contractPaid):
-        cursor = db.connection.cursor()
+    sql = (
+        "INSERT INTO Contracts (contractID, email, contractBegin, contractEnd, contractPath, contractPaid)"
+        f"VALUES ('{contractID}', '{email}', '{contractBegin}', '{contractEnd}', '{contractPath}', '{contractPaid}')"
+    )
+    cursor.execute(sql)
 
-        sql = (
-            "INSERT INTO Contracts (contractID, email, contractBegin, contractEnd, contractPath, contractPaid)"
-            f"VALUES ('{contractID}', '{email}', '{contractBegin}', '{contractEnd}', '{contractPath}', '{contractPaid}')"
-        )
-        cursor.execute(sql)
-
-    @classmethod
-    def updateUserNote(self, note, cardID):
-        cursor = db.connection.cursor()
-        sql = f"UPDATE Users SET note = '{note}' WHERE cardID = '{cardID}'"
-        cursor.execute(sql)
+def update_user_note(note, cardID):
+    cursor = db.connection.cursor()
+    sql = f"UPDATE Users SET note = '{note}' WHERE cardID = '{cardID}'"
+    cursor.execute(sql)

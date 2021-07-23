@@ -1,8 +1,7 @@
 import pandas as pd
-from database.dbQuerys import dbQuerys
+import database.dbQuerys
 
 main_dir = ""
-# main_dir = "IODB/"
 
 df = pd.read_csv(f"{main_dir}csvs/users.csv", sep=",")
 
@@ -13,7 +12,7 @@ def import_users():
         for line in src.read().split("\n"):
             if i:
                 line = line.split(",")
-                dbQuerys.addUser(
+                database.dbQuerys.add_user(
                     line[0],
                     line[1],
                     line[2],
@@ -39,7 +38,7 @@ def import_strikes():
         for line in src.read().split("\n"):
             if i:
                 line = line.split(",")
-                dbQuerys.addStrike(
+                database.dbQuerys.add_strike(
                     line[0],
                     line[1]
                 )
@@ -53,7 +52,7 @@ def import_log_users():
         for line in src.read().split("\n"):
             if i:
                 line = line.split(",")
-                dbQuerys.addLog(
+                database.dbQuerys.add_log(
                     line[0],
                     line[1],
                     line[2]
@@ -68,7 +67,7 @@ def import_contracts():
         for line in src.read().split("\n"):
             if i:
                 line = line.split(",")
-                dbQuerys.addContract(
+                database.dbQuerys.add_contract(
                     line[0],
                     line[1],
                     line[2],
@@ -78,6 +77,3 @@ def import_contracts():
                 )
                 print(f"imported {line[0]}")
             i += 1
-
-#import_users()
-# import_log_users()

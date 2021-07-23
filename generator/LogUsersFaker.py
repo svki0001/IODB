@@ -9,17 +9,24 @@ import loading_bar
 def generate_log_users():
     n_log_users = 100000
     main_dir = ""
+
+    # init faker
     faker = Faker()
 
+    # init time
     start_time = 0
+
+    # get generated cardIDs
     users = pd.read_csv(f"{main_dir}csvs/users.csv")
     u_cardIDs = users["cardID"]
 
+    # init time
+    start_time = time.time()
+
+    print("starting log users generator...")
     with open(f"{main_dir}csvs/log_users.csv", "w", encoding="utf-8") as dest:
         dest.write(f"cardID,checkIn,checkOut")
         
-        print("starting generator...")
-        start_time = time.time()
 
         for i in range(n_log_users):
             cardID = random.choice(u_cardIDs)
