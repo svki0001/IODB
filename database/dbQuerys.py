@@ -64,3 +64,22 @@ def update_user_note(note, cardID):
     cursor = db.connection.cursor()
     sql = f"UPDATE Users SET note = '{note}' WHERE cardID = '{cardID}'"
     cursor.execute(sql)
+
+def select_contract_begin(contractID):
+    cursor = db.connection.cursor(dictionary = True, buffered = True)
+
+    sql = (
+        "SELECT contractBegin "
+        "FROM Contracts "
+        f"WHERE contractID = '{contractID}'"
+    )
+
+    cursor.execute(sql)
+    data = cursor.fetchone()
+
+    return data["contractBegin"]
+
+def update_contract_end(contractID, contractEnd):
+    cursor = db.connection.cursor()
+    sql = f"UPDATE Contracts SET contractEnd = '{contractEnd}' WHERE contractID = '{contractID}'"
+    cursor.execute(sql)

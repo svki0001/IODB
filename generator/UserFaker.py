@@ -76,7 +76,7 @@ def generate_users():
                     words = randrange(1, 15)
                     note = lorem.words(words)
 
-                dest.write(f"{cardID},{username},{email},{prename},{surname},{birthDate},{sex},{validityDate},{state},{note},{rights},{street},{postcode},{city}\n")
+                dest.write(f"\n{cardID},{username},{email},{prename},{surname},{birthDate},{sex},{validityDate},{state},{note},{rights},{street},{postcode},{city}")
                 loading_bar.print_loading_bar(current=i, max=n_users)
                 
     end_time = time.time()

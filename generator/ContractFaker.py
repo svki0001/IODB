@@ -45,8 +45,14 @@ def generate_contracts():
             else:
                 n = str(int(re.search(r"\d+", email).group()))
                 contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(usernames[i]) + n
-                
-            contractEnd="2021-" + str(randrange(1,7)) + "01"
+            
+            beginMonth = int(contractBegin.split("-")[1])
+            if beginMonth >= 3 and beginMonth < 9:
+                endMonth = 9
+            else:
+                endMonth = 3
+            contractEnd= f"2021-{endMonth:02d}-01"
+            
             contractPath="AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(prenames[i]) + "_" + str(surnames[i]) + ".pdf"
             contractPaid= contractPaidRandom[0]
 
