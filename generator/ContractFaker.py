@@ -47,11 +47,15 @@ def generate_contracts():
                 contractID = "AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(usernames[i]) + n
             
             beginMonth = int(contractBegin.split("-")[1])
+            endYear = int(contractBegin.split(",")[0])
             if beginMonth >= 3 and beginMonth < 9:
                 endMonth = 9
-            else:
+            elif beginMonth < 3:
                 endMonth = 3
-            contractEnd= f"2021-{endMonth:02d}-01"
+            elif beginMonth >= 9:
+                endMonth = 3
+                endYear += 1
+            contractEnd= f"{endYear}-{endMonth:02d}-01"
             
             contractPath="AZW-" + str(beforeBegin_calc.strftime("%Y-%m-%d")) + "_" + str(prenames[i]) + "_" + str(surnames[i]) + ".pdf"
             contractPaid= contractPaidRandom[0]

@@ -1,3 +1,4 @@
+from mysql.connector.cursor import CursorBase
 from .DB import db
 
 def add_user(cardID, username, email, prename, surname, birthDate, sex, validityDate, state, note, rights, street, postcode, city):
@@ -60,11 +61,6 @@ def add_contract(contractID, email, contractBegin, contractEnd, contractPath, co
     )
     cursor.execute(sql)
 
-def update_user_note(note, cardID):
-    cursor = db.connection.cursor()
-    sql = f"UPDATE Users SET note = '{note}' WHERE cardID = '{cardID}'"
-    cursor.execute(sql)
-
 def select_contract_begin(contractID):
     cursor = db.connection.cursor(dictionary = True, buffered = True)
 
@@ -78,6 +74,31 @@ def select_contract_begin(contractID):
     data = cursor.fetchone()
 
     return data["contractBegin"]
+
+def select_cardids_by_rights(rights):
+    cursor : CursorBase = db.connection.cursor(dictionary = True, buffered = True)
+
+    sql = f"SELECT cardID FROM Users WHERE rights = '{rights}'"
+
+    cursor.execute(sql)
+    data = cursor.fetchall()
+
+    return data
+
+def update_user_note(note, cardID):
+    cursor = db.connection.cursor()
+    sql = f"UPDATE Users SET note = '{note}' WHERE cardID = '{cardID}'"
+    cursor.execute(sql)
+
+def update_user_rights_by_right(rights, where_rights):
+    cursor = db.connection.cursor(dictionary = True, buffered = True)
+    sql = f"UPDATE Users SET rights = '{rights}' WHERE rights = '{where_rights}'"
+    cursor.execute(sql)
+
+def update_user_rights_by_cardID(rights, cardID):
+    cursor = db.connection.cursor(dictionary = True, buffered = True)
+    sql = f"UPDATE Users SET rights = '{rights}' WHERE cardID = '{cardID}'"
+    cursor.execute(sql)
 
 def update_contract_end(contractID, contractEnd):
     cursor = db.connection.cursor()
